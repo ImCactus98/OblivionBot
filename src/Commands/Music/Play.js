@@ -18,10 +18,12 @@ module.exports = class extends Command {
             voiceChannel: channel,
             textChannel: message.channel,
         });
+        const getPlayer = this.client.music.players.get(message.guild.id);
         const res = await this.client.music.search(args.join(" "), message.author).then(res => {
             switch(res.loadType) {
                 case "TRACK_LOADED":
                     player.queue.add(res.tracks[0]);
+                    if(getPlayer.queue[0]) message.channel.send(`Enqueuing track **${res.tracks[0].title}.`);
                     if (!player.playing) player.play();
                     break;
                 case "SEARCH_RESULT":
@@ -41,6 +43,7 @@ module.exports = class extends Command {
 
                         const track = tracks[Number(m.content) - 1];
                         player.queue.add(track);
+                        if(getPlayer.queue[0]) message.channel.send(`Enqueuing track **${track.title}.`);
                         if (!player.playing) player.play();
                     });
                     collector.on("end", (_, reason) => {
