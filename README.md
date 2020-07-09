@@ -11,7 +11,7 @@ With Oblivion Bot you can do many things such as:
 - Moderating your server using our moderation commands
 - Getting informations about the bot, the server and any user
 
-[!Help command](https://raw.githubusercontent.com/ImCactus98/OblivionBot/master/image.PNG)
+[!Help command](https://github.com/ImCactus98/OblivionBot/image.PNG)
 
 ## Self hosting
 
