@@ -1,0 +1,5 @@
+{
+    "prefix": "o!",
+    "token": "your bot token",
+    "owners": ["your id (you can use multiple ids too)"]
+}
