@@ -33,7 +33,7 @@ module.exports = class extends Command {
             case "SEARCH_RESULT":
                 let index = 1;
                 const tracks = res.tracks.slice(0, 5);
-                const embed = new MessageEmbed()
+                const embed = await new MessageEmbed()
                 .setAuthor("Song Selection", message.author.displayAvatarUrl)
                 .setDescription(tracks.map(video => `**${index++} -** ${video.title}`))
                 .setColor('RANDOM')
