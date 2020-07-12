@@ -19,7 +19,8 @@ module.exports = class extends Command {
             textChannel: message.channel,
         });
         const getPlayer = this.client.music.players.get(message.guild.id);
-        const res = await this.client.music.search(args.join(" "), message.author).then(res => {
+        async playIt(){
+            this.client.music.search(args.join(" "), message.author).then(res => {
             switch(res.loadType) {
                 case "TRACK_LOADED":
                     player.queue.add(res.tracks[0]);
@@ -56,6 +57,8 @@ module.exports = class extends Command {
                     message.channel.send(`Enqueuing **${res.playlist.tracks.length}** tracks in playlist **${res.playlist.info.name}**`);
                     if (!player.playing) player.play();
             }
-        })
+        });
+        }
+        playIt();
     }
 }
