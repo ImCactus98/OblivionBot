@@ -34,7 +34,7 @@ module.exports = class extends Command {
                     .setDescription(tracks.map(video => `**${index++} -** ${video.title}`))
                     .setColor('RANDOM')
                     .setFooter(`Your response time closes within 30 seconds. Type 'cancel' to cancel the selection.`);
-                    message.channel.send(embed);
+                    let chooseMsg = await message.channel.send(embed);
                     const collector = message.channel.createMessageCollector(m => {
                         return m.author.id === message.author.id && new RegExp('^([1-5|cancel])$', "i").test(m.content);
                     }, { time: 30000, max: 1 });
@@ -45,6 +45,7 @@ module.exports = class extends Command {
                         player.queue.add(track);
                         if(getPlayer.queue[0]) message.channel.send(`Enqueuing track **${track.title}**.`);
                         if (!player.playing) player.play();
+                        chooseMsg.delete();
                     });
                     collector.on("end", (_, reason) => {
                         if(["time", "cancelled"].includes(reason)) return message.channel.send("Cancelled selection");
